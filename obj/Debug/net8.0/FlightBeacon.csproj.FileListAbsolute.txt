@@ -1,0 +1,14 @@
+/Users/jake/Desktop/FlightBeacon/bin/Debug/net8.0/FlightBeacon
+/Users/jake/Desktop/FlightBeacon/bin/Debug/net8.0/FlightBeacon.deps.json
+/Users/jake/Desktop/FlightBeacon/bin/Debug/net8.0/FlightBeacon.runtimeconfig.json
+/Users/jake/Desktop/FlightBeacon/bin/Debug/net8.0/FlightBeacon.dll
+/Users/jake/Desktop/FlightBeacon/bin/Debug/net8.0/FlightBeacon.pdb
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.GeneratedMSBuildEditorConfig.editorconfig
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.AssemblyInfoInputs.cache
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.AssemblyInfo.cs
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.csproj.CoreCompileInputs.cache
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.dll
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/refint/FlightBeacon.dll
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.pdb
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.genruntimeconfig.cache
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/ref/FlightBeacon.dll
