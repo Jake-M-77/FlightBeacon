@@ -30,6 +30,23 @@ public class OpenSkyService
         return json?.States ?? new List<StateVector>();
     }
 
+    public async Task<List<StateVector>> GetDeparturesByAirportAsync(string airport, int begin, int end)
+    {
+        var url = "https://opensky-network.org/api/flights/departure";
+
+        if (airport != null && begin != null && end != null)
+        {
+            url += "?" + $"airport={airport}" + "&" + $"begin={begin}" + "&" + $"end={end}";
+        }
+
+        var response = await _httpClient.GetStringAsync(url);
+        Console.WriteLine(response);
+
+        var json = JsonSerializer.Deserialize<OpenSkyResponse>(response);
+
+        return json?.States ?? new List<StateVector>();
+
+    }
 
     public class OpenSkyResponse
     {
