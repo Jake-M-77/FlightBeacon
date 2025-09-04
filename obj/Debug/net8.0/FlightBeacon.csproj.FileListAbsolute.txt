@@ -12,3 +12,4 @@
 /Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.pdb
 /Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.genruntimeconfig.cache
 /Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/ref/FlightBeacon.dll
+/Users/jake/Desktop/FlightBeacon/obj/Debug/net8.0/FlightBeacon.sourcelink.json
