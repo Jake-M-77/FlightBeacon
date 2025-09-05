@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 public class MenuHelper
 {
     
-    private readonly OpenSkyService _OSS;
+    private readonly OpenSkyService openskyservice;
 
-    public MenuHelper(OpenSkyService OSS)
+    public MenuHelper(OpenSkyService _openskyservice)
     {
-        _OSS = OSS;
+        openskyservice = _openskyservice;
     }
 
     public async Task DisplayMenu()
@@ -146,7 +146,7 @@ public class MenuHelper
 
             
 
-            var departures = await _OSS.GetDeparturesByAirportAsync(airport: ICAO24, begin: epoch_df, end: epoch_dt);
+            var departures = await openskyservice.GetDeparturesByAirportAsync(airport: ICAO24, begin: epoch_df, end: epoch_dt);
 
             if (departures.Count == 0)
             {

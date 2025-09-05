@@ -3,19 +3,19 @@ Console.WriteLine("Hello, World!");
 
 HttpClient httpClient = new HttpClient();
 
-OpenSkyService OSS = new OpenSkyService(httpClient);
+OpenSkyService openSkyService = new OpenSkyService(httpClient);
 
 
 
-LoginHelper LH = new LoginHelper();
+LoginHelper loginHelper = new LoginHelper();
 
-var loginData = LH.LoginScreenAsync();
+var loginData = loginHelper.LoginScreenAsync();
 
-await OSS.AuthenticateAsync($"{loginData.ClientId}", $"{loginData.ClientSecret}");
+await openSkyService.AuthenticateAsync($"{loginData.ClientId}", $"{loginData.ClientSecret}");
 
-MenuHelper MH = new MenuHelper(OSS);
+MenuHelper menuHelper = new MenuHelper(openSkyService);
 
-await MH.DisplayMenu();
+await menuHelper.DisplayMenu();
 
 
 
