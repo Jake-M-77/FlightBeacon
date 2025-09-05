@@ -5,31 +5,37 @@ HttpClient httpClient = new HttpClient();
 
 OpenSkyService OSS = new OpenSkyService(httpClient);
 
+
+
 LoginHelper LH = new LoginHelper();
 
 var loginData = LH.LoginScreenAsync();
 
 await OSS.AuthenticateAsync($"{loginData.ClientId}", $"{loginData.ClientSecret}");
 
+MenuHelper MH = new MenuHelper(OSS);
+
+await MH.DisplayMenu();
 
 
-var departures = await OSS.GetDeparturesByAirportAsync(
-    airport: "EDDF",
-    begin: 1674993600,
-    end: 1674997200
-);
 
-if (departures.Count == 0)
-{
-    Console.WriteLine("No departures found for this period.");
-}
-else
-{
-    foreach (var flight in departures)
-    {
-        Console.WriteLine($"Callsign: {flight.Callsign}, ICAO: {flight.ICao24}, Departure: {flight.estDepartureAirport}, Arrival: {flight.estArrivalAirport}");
-    }
-}
+// var departures = await OSS.GetDeparturesByAirportAsync(
+//     airport: "EDDF",
+//     begin: 1674993600,
+//     end: 1674997200
+// );
+
+// if (departures.Count == 0)
+// {
+//     Console.WriteLine("No departures found for this period.");
+// }
+// else
+// {
+//     foreach (var flight in departures)
+//     {
+//         Console.WriteLine($"Callsign: {flight.Callsign}, ICAO: {flight.ICao24}, Departure: {flight.estDepartureAirport}, Arrival: {flight.estArrivalAirport}");
+//     }
+// }
 
 // try
 // {
