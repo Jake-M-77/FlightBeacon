@@ -88,7 +88,7 @@ public class OpenSkyService
             return new List<FlightData>();
         }
 
-        
+
 
     }
 

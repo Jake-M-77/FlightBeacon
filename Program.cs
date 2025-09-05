@@ -6,7 +6,6 @@ HttpClient httpClient = new HttpClient();
 OpenSkyService openSkyService = new OpenSkyService(httpClient);
 
 
-
 LoginHelper loginHelper = new LoginHelper();
 
 var loginData = loginHelper.LoginScreenAsync();

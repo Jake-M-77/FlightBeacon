@@ -15,17 +15,77 @@ public class MenuHelper
 
         Console.WriteLine("==- Welcome to FlightBeacon! -==");
         Console.WriteLine("1. Airport Menu");
-        Console.WriteLine("2.");
+        Console.WriteLine("2. Region Menu");
         Console.WriteLine("3.");
 
         Console.Write("Please choose a menu: ");
         string response = Console.ReadLine();
 
-        if (response == "1")
+
+
+        switch (response)
         {
-            await AirportMenu();
+            case "1":
+                await AirportMenu();
+                break;
+            case "2":
+                await DisplayDataFromRegion();
+                break;
+            case "3":
+            //Future feature
+                break;
+
         }
     }
+
+    public async Task DisplayDataFromRegion()
+    {
+
+        var box = await GetRegionFromUser();
+        var states = await openskyservice.GetStatesByBoundingBoxAsync(lamin: box.LatMin, lamax: box.LatMax, lomin: box.LonMin, lomax: box.LonMax);
+
+        if (states.Count == 0)
+        {
+            Console.WriteLine("No flights returned.");
+        }
+        else
+        {
+            Console.WriteLine("checkkkk\n");
+            foreach (var state in states)
+            {
+                Console.WriteLine($"Callsign: {state.Callsign}, ICAO: {state.Icao24}, Lat: {state.Latitude}, Lon: {state.Longitude}, Altitude: {state.BaroAltitude}\n");
+            }
+        }
+
+    }
+
+    public async Task<BoundingBox> GetRegionFromUser()
+    {
+        Regions regions = new Regions();
+        Console.WriteLine("Choose a region:");
+        foreach (var key in regions.Presets.Keys)
+        {
+            Console.WriteLine($" - {key}");
+        }
+
+        string response = Console.ReadLine();
+        response = response.ToUpper();
+
+        if (regions.Presets.ContainsKey(response))
+        {
+            var x = regions.Presets.FirstOrDefault(x => x.Key == response);
+            Console.WriteLine($"LatMin: {x.Value.LatMin}, LatMax: {x.Value.LatMax}, LonMin: {x.Value.LonMin}, LonMax: {x.Value.LonMax}"); //DEBUG PURPOSES
+            
+            return x.Value;
+
+        }
+        else
+        {
+            Console.WriteLine("Invalid Region!");
+            return null;
+        }
+    }
+
 
     public async Task AirportMenu()
     {
@@ -136,7 +196,7 @@ public class MenuHelper
             }
         }
     }
-    
+
     public async Task GetArrivalsAsync(string ICAO24)
     {
         var DAH = await GetDepartureArrivalHelperMethod(ICAO24);
