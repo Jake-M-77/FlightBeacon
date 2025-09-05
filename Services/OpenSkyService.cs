@@ -92,6 +92,26 @@ public class OpenSkyService
 
     }
 
+    public async Task<List<FlightData>> GetArrivalsByAirportAsync(string airport, int begin, int end)
+    {
+        var url = $"https://opensky-network.org/api/flights/arrival?airport={airport}&begin={begin}&end={end}";
+
+        try
+        {
+            var response = await _httpClient.GetStringAsync(url);
+            var flights = JsonSerializer.Deserialize<List<FlightData>>(response);
+            return flights ?? new List<FlightData>();
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+            return new List<FlightData>();
+        }
+
+        
+
+    }
+
     public class OpenSkyResponse
     {
         public int Time { get; set; }

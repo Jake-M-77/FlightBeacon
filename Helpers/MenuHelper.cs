@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 public class MenuHelper
 {
-    
+
     private readonly OpenSkyService openskyservice;
 
     public MenuHelper(OpenSkyService _openskyservice)
@@ -107,13 +107,56 @@ public class MenuHelper
         Console.Write("Please choose a menu: ");
         string response = Console.ReadLine();
 
-        if (response == "1")
+        switch (response)
         {
-            await GetDepartures(ICAO24);
+            case "1":
+                await GetDeparturesAsync(ICAO24);
+                break;
+            case "2":
+                await GetArrivalsAsync(ICAO24);
+                break;
         }
     }
 
-    public async Task GetDepartures(string ICAO24)
+    public async Task GetDeparturesAsync(string ICAO24)
+    {
+        var DAH = await GetDepartureArrivalHelperMethod(ICAO24);
+
+        var departures = await openskyservice.GetDeparturesByAirportAsync(airport: ICAO24, begin: DAH.begintime, end: DAH.endtime);
+
+        if (departures.Count == 0)
+        {
+            Console.WriteLine("No departures found for this period.");
+        }
+        else
+        {
+            foreach (var flight in departures)
+            {
+                Console.WriteLine($"Callsign: {flight.Callsign}, ICAO: {flight.ICao24}, Departure: {flight.estDepartureAirport}, Arrival: {flight.estArrivalAirport}");
+            }
+        }
+    }
+    
+    public async Task GetArrivalsAsync(string ICAO24)
+    {
+        var DAH = await GetDepartureArrivalHelperMethod(ICAO24);
+
+        var departures = await openskyservice.GetArrivalsByAirportAsync(airport: ICAO24, begin: DAH.begintime, end: DAH.endtime);
+
+        if (departures.Count == 0)
+        {
+            Console.WriteLine("No arrivals found for this period.");
+        }
+        else
+        {
+            foreach (var flight in departures)
+            {
+                Console.WriteLine($"Callsign: {flight.Callsign}, ICAO: {flight.ICao24}, Departure: {flight.estDepartureAirport}, Arrival: {flight.estArrivalAirport}");
+            }
+        }
+    }
+
+    public async Task<DepartureArrivalHelper> GetDepartureArrivalHelperMethod(string ICAO24)
     {
         Console.Write("Please enter Date (YYYY-MM-DD): ");
         string dateinput = Console.ReadLine();
@@ -144,25 +187,21 @@ public class MenuHelper
             Console.WriteLine(epoch_datefrom); // DEBUG PURPOSES
             Console.WriteLine(epoch_dateto); // DEBUG PURPOSES
 
-            
-
-            var departures = await openskyservice.GetDeparturesByAirportAsync(airport: ICAO24, begin: epoch_df, end: epoch_dt);
-
-            if (departures.Count == 0)
+            DepartureArrivalHelper departureArrivalHelper = new DepartureArrivalHelper()
             {
-                Console.WriteLine("No departures found for this period.");
-            }
-            else
-            {
-                foreach (var flight in departures)
-                {
-                    Console.WriteLine($"Callsign: {flight.Callsign}, ICAO: {flight.ICao24}, Departure: {flight.estDepartureAirport}, Arrival: {flight.estArrivalAirport}");
-                }
-            }
+                Icao24 = ICAO24,
+                begintime = epoch_df,
+                endtime = epoch_dt
+            };
+
+            return departureArrivalHelper;
         }
         else
         {
             Console.WriteLine("Invalid date or time format in either timefrom or timeto!");
+            return null;
         }
+
     }
 }
+
