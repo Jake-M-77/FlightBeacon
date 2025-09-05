@@ -5,15 +5,11 @@ HttpClient httpClient = new HttpClient();
 
 OpenSkyService OSS = new OpenSkyService(httpClient);
 
-string client_id;
-string client_secret;
+LoginHelper LH = new LoginHelper();
 
-Console.Write("Please enter your Client ID: ");
-client_id = Console.ReadLine();
-Console.Write("Please enter your Client Secret: ");
-client_secret = Console.ReadLine();
+var loginData = LH.LoginScreenAsync();
 
-await OSS.AuthenticateAsync($"{client_id}", $"{client_secret}");
+await OSS.AuthenticateAsync($"{loginData.ClientId}", $"{loginData.ClientSecret}");
 
 
 
