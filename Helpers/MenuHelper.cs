@@ -325,6 +325,12 @@ public class MenuHelper
 
     public async Task<DepartureArrivalHelper> GetDepartureArrivalHelperMethod(string ICAO24)
     {
+        //This method could be alot shorter, but i quite like it like this,
+        //where its step by step, plus the time range can only be a 2 hour 
+        //difference between start and to time.
+
+        Console.WriteLine("INFO: Time from and Time to, can only be a maximum of two hours apart");
+
         Console.Write("Please enter Date (YYYY-MM-DD): ");
         string dateinput = Console.ReadLine();
 
