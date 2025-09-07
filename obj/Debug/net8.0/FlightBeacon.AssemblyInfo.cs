@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FlightBeacon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bab2b3a18be2daca79152376ba846be0c7e84a7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8532a755ed7668dc2fa76c46fc7cdd153c5dc8ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("FlightBeacon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FlightBeacon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,9 +8,9 @@ OpenSkyService openSkyService = new OpenSkyService(httpClient);
 
 LoginHelper loginHelper = new LoginHelper();
 
-// var loginData = loginHelper.LoginScreenAsync();
+var loginData = loginHelper.LoginScreenAsync();
 
-// await openSkyService.AuthenticateAsync($"{loginData.ClientId}", $"{loginData.ClientSecret}");
+await openSkyService.AuthenticateAsync($"{loginData.ClientId}", $"{loginData.ClientSecret}");
 
 MenuHelper menuHelper = new MenuHelper(openSkyService);
 

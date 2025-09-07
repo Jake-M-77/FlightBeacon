@@ -48,25 +48,32 @@ public class MenuHelper
 
     public async Task DisplayDataFromRegion()
     {
+        bool HasStates = false;
 
         var box = await GetRegionFromUser();
         var states = await openskyservice.GetStatesByBoundingBoxAsync(lamin: box.LatMin, lamax: box.LatMax, lomin: box.LonMin, lomax: box.LonMax);
-
-        if (states.Count == 0)
+        
+        if(states != null)
         {
-            Console.WriteLine("No flights returned.");
-            await Task.Delay(5);
-            await DisplayMenu();
+            HasStates = true;
         }
-        else
+
+        if (HasStates == true)
         {
             Console.WriteLine("checkkkk\n");
             foreach (var state in states)
             {
                 Console.WriteLine($"Callsign: {state.Callsign}, ICAO: {state.Icao24}, Lat: {state.Latitude}, Lon: {state.Longitude}, Altitude: {state.BaroAltitude}\n");
             }
-
+            await Task.Delay(5000);
             await HandleMenuReturn();
+
+        }
+        else
+        {
+            Console.WriteLine("No flights returned.");
+            await Task.Delay(2000);
+            await DisplayMenu();
         }
 
     }
