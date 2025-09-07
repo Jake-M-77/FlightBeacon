@@ -67,6 +67,8 @@ public class OpenSkyService
         Console.WriteLine(url);
         Console.WriteLine(response);
 
+        
+
         var json = JsonSerializer.Deserialize<OpenSkyResponse>(response);
 
         return json?.States ?? new List<StateVector>();
@@ -108,7 +110,7 @@ public class OpenSkyService
             return new List<FlightData>();
         }
 
-        
+
 
     }
 

@@ -48,33 +48,33 @@ public class MenuHelper
 
     public async Task DisplayDataFromRegion()
     {
-        bool HasStates = false;
+
+        // NOTE: This method currently just prints out the raw output from the OpenSky API.
+        // The API returns flight data as an array of arrays, so parsing it into structured StateVector
+        // objects may not always work correctly. This is why the detailed display logic is commented out.
+
+
 
         var box = await GetRegionFromUser();
         var states = await openskyservice.GetStatesByBoundingBoxAsync(lamin: box.LatMin, lamax: box.LatMax, lomin: box.LonMin, lomax: box.LonMax);
-        
-        if(states != null)
-        {
-            HasStates = true;
-        }
 
-        if (HasStates == true)
-        {
-            Console.WriteLine("checkkkk\n");
-            foreach (var state in states)
-            {
-                Console.WriteLine($"Callsign: {state.Callsign}, ICAO: {state.Icao24}, Lat: {state.Latitude}, Lon: {state.Longitude}, Altitude: {state.BaroAltitude}\n");
-            }
-            await Task.Delay(5000);
-            await HandleMenuReturn();
+        await HandleMenuReturn();
 
-        }
-        else
-        {
-            Console.WriteLine("No flights returned.");
-            await Task.Delay(2000);
-            await DisplayMenu();
-        }
+        // if (states.Count == 0)
+        // {
+        //     Console.WriteLine("No flights returned.");
+        //     await Task.Delay(5);
+        //     await DisplayMenu();
+        // }
+        // else
+        // {
+        //     Console.WriteLine("checkkkk\n");
+        //     foreach (var state in states)
+        //     {
+        //         Console.WriteLine($"Callsign: {state.Callsign}, ICAO: {state.Icao24}, Lat: {state.Latitude}, Lon: {state.Longitude}, Altitude: {state.BaroAltitude}\n");
+        //     }
+
+        // }
 
     }
 
@@ -118,7 +118,6 @@ public class MenuHelper
 
         }
     }
-
 
     public async Task AirportMenu()
     {
